@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+    />
+    <link
+      href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css"
+      rel="stylesheet"
+    />
+    <!-- If you move jQuery to public folder -->
+    <script src="./libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- or use CDN for jQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+    <script src="./ace-editor/ace.js"></script>
+    <script src="./dist/xapiwrapper.min.js"></script>
+
+    <style>
+      #stmtinput {
+        height: 600px;
+      }
+    </style>
+  </head>
+  <body class="container">
+    <!-- <span id="onlineflag" class="label label-default pull-right">Checking..</span>
+    <input id="checkonlinetoggle" type="checkbox" data-toggle="toggle" data-on="Checking" data-off="Not Checking" data-onstyle="success" data-offstyle="warning" data-size="mini" checked>
+    <span id="endpoint" contentEditable="true"></span>
+    <div class="row">
+        <div class="col-xs-12">
+            <br>
+        </div>
+    </div> -->
+    <div class="row">
+      <h2>Experience Generator</h2>
+      <p>
+        Send test statements to the empress.eco Experience Protocol at
+        <span id="endpoint"></span>
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">
+        <hr />
+        <h4>Custom Statement</h4>
+        <form id="makestmtform">
+          <div class="form-group">
+            <div><strong>Actor</strong></div>
+            <div class="radio">
+              <label>
+                <input
+                  type="radio"
+                  name="actorradio"
+                  id="actormbox"
+                  value="mbox"
+                  checked
+                />
+                mbox
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input
+                  type="radio"
+                  name="actorradio"
+                  id="actoraccount"
+                  value="account"
+                />
+                account
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div><strong>Object</strong></div>
+            <div class="radio">
+              <label>
+                <input
+                  type="radio"
+                  name="objectradio"
+                  id="objectactivity"
+                  value="Activity"
+                  checked
+                />
+                activity
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input
+                  type="radio"
+                  name="objectradio"
+                  id="objectagent"
+                  value="Agent"
+                />
+                agent
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input
+                  type="radio"
+                  name="objectradio"
+                  id="objectstmtref"
+                  value="StatementRef"
+                />
+                stmt ref
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div><strong>Result</strong></div>
+            <div class="checkbox" style="margin-bottom: 1.5em">
+              Score <br />
+              <label style="margin-right: 10px">
+                <input name="resultcbx" type="checkbox" value="scaled" />
+                scaled
+              </label>
+              <label style="margin-right: 10px">
+                <input name="resultcbx" type="checkbox" value="raw" />
+                raw
+              </label>
+              <label style="margin-right: 10px">
+                <input name="resultcbx" type="checkbox" value="min" />
+                min
+              </label>
+              <label>
+                <input name="resultcbx" type="checkbox" value="max" />
+                max
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input name="resultcbx" type="checkbox" value="success" />
+                success
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input name="resultcbx" type="checkbox" value="completion" />
+                completion
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input name="resultcbx" type="checkbox" value="response" />
+                response
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input name="resultcbx" type="checkbox" value="duration" />
+                duration
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input name="resultcbx" type="checkbox" value="ext" />
+                extensions
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div><strong>Context</strong></div>
+            <div class="checkbox">
+              <label>
+                <input name="contextcbx" type="checkbox" value="registration" />
+                registration
+              </label>
+            </div>
+            <div class="checkbox" style="margin-bottom: 1.5em">
+              ctx acts <br />
+              <label style="margin-right: 10px">
+                <input name="contextcbx" type="checkbox" value="parent" />
+                parent
+              </label>
+              <label style="margin-right: 10px">
+                <input name="contextcbx" type="checkbox" value="grouping" />
+                grouping
+              </label>
+              <label style="margin-right: 10px">
+                <input name="contextcbx" type="checkbox" value="category" />
+                category
+              </label>
+              <label>
+                <input name="contextcbx" type="checkbox" value="other" />
+                other
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input name="contextcbx" type="checkbox" value="ext" />
+                extensions
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-xs-9">
+        <div class="row">
+          <div class="col-xs-12">
+            <button id="createstmtbtn" type="button" class="btn btn-info">
+              Create basic statement
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="stmtinput"></label>
+            <pre id="stmtinput"></pre>
+          </div>
+          <button id="sendbtn" type="button" class="btn btn-success">
+            send
+          </button>
+          <button
+            id="clearbtn"
+            type="button"
+            class="btn btn-default pull-right"
+          >
+            Clear
+          </button>
+        </div>
+        <div class="row" style="margin-top: 1em">
+          <div class="col-xs-12">
+            <div id="results"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./wrapper.js"></script>
+    <script src="./editor.js"></script>
+    <script src="./mkstmt.js"></script>
+    <script src="./outputresults.js"></script>
+    <script src="./clearform.js"></script>
+  </body>
+</html>

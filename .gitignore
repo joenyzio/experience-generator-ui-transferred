@@ -1,0 +1,36 @@
+# .gitignore
+
+# Node.js dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Editor and system files
+.DS_Store
+*.swp
+*.swo
+*.swn
+*.idea/
+
+# Test directories
+coverage/
+test-results/
+
+# Build files
+build/
+dist/
+public/dist/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Lock files (uncomment if you decide not to commit lock files)
+# package-lock.json
+# frontend/package-lock.json
